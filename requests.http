@@ -1,0 +1,74 @@
+//############### JDBC ############
+
+###default
+POST http://localhost:8080/jbdc
+
+
+//############### JDBC TEMPLATE ############
+
+###fetch-size = 50000
+POST http://localhost:8080/jdbc/template/50000/pr?prReadOnly=false&prAutoCommit=true
+
+###fetch-size = 50000, read only on, auto commit off
+POST http://localhost:8080/jdbc/template/50000/pr?prReadOnly=true&prAutoCommit=false
+
+###fetch-size = 50000, read only on, auto commit on
+POST http://localhost:8080/jdbc/template/50000/pr?prReadOnly=true&prAutoCommit=true
+
+###fetch-size = 50000, read only off, auto commit on
+POST http://localhost:8080/jdbc/template/50000/pr?prReadOnly=false&prAutoCommit=true
+
+###read only on
+POST http://localhost:8080/jdbc/template/1000000/pr?prReadOnly=true&prAutoCommit=false
+
+###default
+POST http://localhost:8080/jdbc/template/1000000/pr?prReadOnly=false&prAutoCommit=true
+
+
+//############### JDBC TEMPLATE TRANSACTIONAL ############
+
+###fetch-size = 50000
+POST http://localhost:8080/jdbc/template-transactional/50000/pr?prReadOnly=false&prAutoCommit=true
+
+###fetch-size = 50000, read only on, auto commit off
+POST http://localhost:8080/jdbc/template-transactional/50000/pr?prReadOnly=true&prAutoCommit=false
+
+###fetch-size = 50000, read only on, auto commit on
+POST http://localhost:8080/jdbc/template-transactional/50000/pr?prReadOnly=true&prAutoCommit=true
+
+###fetch-size = 50000, read only off, auto commit on
+POST http://localhost:8080/jdbc/template-transactional/50000/pr?prReadOnly=false&prAutoCommit=true
+
+###read only on
+POST http://localhost:8080/jdbc/template-transactional/1000000/pr?prReadOnly=true&prAutoCommit=false
+
+###default
+POST http://localhost:8080/jdbc/template-transactional/1000000/pr?prReadOnly=false&prAutoCommit=true
+
+
+//############### JPA STREAM ############
+
+###fetch-size = 50000
+POST http://localhost:8080/jpa/fetch-size
+
+###fetch-size = 50000, read only on, cacheable off
+POST http://localhost:8080/jpa/read-only-fetch-size
+
+###fetch-size = 50000, read only on, cacheable on
+POST http://localhost:8080/jpa/read-only-and-cache-fetch-size
+
+###fetch-size = 50000, read only off, cacheable on
+POST http://localhost:8080/jpa/cache-fetch-size
+
+###read only on
+POST http://localhost:8080/jpa/read-only
+
+###default
+POST http://localhost:8080/jpa
+
+
+//############### HIBERNATE SCROLLABLERESULTS ############
+
+###default
+POST http://localhost:8080/scrollable
+
