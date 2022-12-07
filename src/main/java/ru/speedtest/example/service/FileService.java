@@ -28,4 +28,12 @@ public class FileService {
             throw new RuntimeException(e);
         }
     }
+
+    public void closeFileWriter(FileWriter fileWriter){
+        try {
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

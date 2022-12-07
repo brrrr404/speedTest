@@ -1,6 +1,7 @@
 package ru.speedtest.example.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
@@ -23,11 +24,13 @@ public class ScrollableResultsService {
     private EntityManager entityManager;
 
 
+    @SneakyThrows
     public void executeScrollableResults() {
         long startTime = System.currentTimeMillis();
 
         Session session = (Session) entityManager.getDelegate();
         ScrollableResults scResults = session.createQuery(MAIN_QUERY)
+                .setFetchSize(100)
                 .scroll(ScrollMode.SCROLL_INSENSITIVE);
         FileWriter fileWriter = fileService.createFileWriter("scrollable.txt");
 
@@ -42,6 +45,8 @@ public class ScrollableResultsService {
         String allTimeInSeconds = (endTime - startTime) / 1000 + " seconds";
         System.out.println(allTimeInSeconds);
         session.close();
+
+        fileService.closeFileWriter(fileWriter);
     }
 
 }

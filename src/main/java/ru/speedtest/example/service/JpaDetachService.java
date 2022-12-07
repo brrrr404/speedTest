@@ -5,11 +5,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.speedtest.example.repository.JpaRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.FileWriter;
 
 @Service
 @RequiredArgsConstructor
-public class JpaService {
+public class JpaDetachService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final JpaRepository speedTestRepository;
     private final FileService fileService;
@@ -21,6 +26,7 @@ public class JpaService {
         speedTestRepository.findAllWithStreamReadOnlyAndCacheableTrueFetchSize().forEach(i -> {
             int hashCode = i.getHashCodeAllObject();
             fileService.writeHashCode(fileWriter, hashCode);
+            entityManager.detach(i);
         });
         long endTime = System.currentTimeMillis();
         String allTimeInSeconds = (endTime - startTime) / 1000 + " seconds";
@@ -36,6 +42,7 @@ public class JpaService {
         speedTestRepository.findAllWithStreamCacheableTrueFetchSize().forEach(i -> {
             int hashCode = i.getHashCodeAllObject();
             fileService.writeHashCode(fileWriter, hashCode);
+            entityManager.detach(i);
         });
         long endTime = System.currentTimeMillis();
         String allTimeInSeconds = (endTime - startTime) / 1000 + " seconds";
@@ -51,6 +58,7 @@ public class JpaService {
         speedTestRepository.findAllWithStreamReadOnlyAndCacheableFalseSizeFetch().forEach(i -> {
             int hashCode = i.getHashCodeAllObject();
             fileService.writeHashCode(fileWriter, hashCode);
+            entityManager.detach(i);
         });
         long endTime = System.currentTimeMillis();
         String allTimeInSeconds = (endTime - startTime) / 1000 + " seconds";
@@ -66,6 +74,7 @@ public class JpaService {
         speedTestRepository.findAllWithStreamFetchSize().forEach(i -> {
             int hashCode = i.getHashCodeAllObject();
             fileService.writeHashCode(fileWriter, hashCode);
+            entityManager.detach(i);
         });
         long endTime = System.currentTimeMillis();
         String allTimeInSeconds = (endTime - startTime) / 1000 + " seconds";

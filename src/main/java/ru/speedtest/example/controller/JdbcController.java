@@ -15,20 +15,23 @@ public class JdbcController {
     public void executeJdbcDefault() {
         jdbcService.executeJdbcRespone();
     }
+
+    @PostMapping("/fetch-size")
+    public void executeJdbcDefaultWithFetchSize() {
+        jdbcService.executeJdbcResponeWithFetchSize();
+    }
     
-    @PostMapping("/template/{fetchSize}/pr")
-    public void executeJdbcTemplateWithCustomFetchSize(@PathVariable
-                                                           Integer fetchSize,
+    @PostMapping("/template/pr")
+    public void executeJdbcTemplateWithCustomFetchSize(
                                                        @RequestParam(name = "prReadOnly") Boolean prReadOnly,
                                                        @RequestParam(name = "prAutoCommit") Boolean prAutoCommit) {
-        jdbcService.executeJdbcTemplateRespone(fetchSize, prReadOnly, prAutoCommit, "jdbcTemplateTest.txt");
+        jdbcService.executeJdbcTemplateRespone(prReadOnly, prAutoCommit, "jdbcTemplateTest.txt");
     }
 
-    @PostMapping("/template-transactional/{fetchSize}/pr")
-    public void executeJdbcTemplateWithCustomFetchSizeTransaction(@PathVariable
-                                                       Integer fetchSize,
+    @PostMapping("/template-transactional/pr")
+    public void executeJdbcTemplateWithCustomFetchSizeTransaction(
                                                        @RequestParam(name = "prReadOnly") Boolean prReadOnly,
                                                        @RequestParam(name = "prAutoCommit") Boolean prAutoCommit) {
-        jdbcService.executeJdbcTemplateResponeWithTransaction(fetchSize, prReadOnly, prAutoCommit);
+        jdbcService.executeJdbcTemplateResponeWithTransaction(prReadOnly, prAutoCommit);
     }
 }
